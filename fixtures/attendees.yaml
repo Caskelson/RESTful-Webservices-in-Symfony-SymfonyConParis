@@ -1,0 +1,3 @@
+App\Entity\Attendee:
+    attendee_1:
+        __construct: [ '3e9a93e6-5567-4956-94ab-df99c684526b', 'Testman', 'Bugfinder', 'testman@symfony.com' ]
