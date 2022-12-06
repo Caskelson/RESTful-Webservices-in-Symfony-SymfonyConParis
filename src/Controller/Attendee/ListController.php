@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller\Attendee;
 
-use App\Entity\Attendee;
 use App\Repository\AttendeeRepository;
+use App\Serializer\AttendeeNormalizer;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,7 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class ListController
 {
     public function __construct(
-        private AttendeeRepository $attendeeRepository
+        private AttendeeRepository $attendeeRepository,
+        private AttendeeNormalizer $normalizer
     ) {
     }
 
@@ -21,10 +22,7 @@ final class ListController
     {
         $allAttendees = $this->attendeeRepository->findAll();
 
-        $allAttendeesAsArray = array_map(
-            static fn (Attendee $attendee) => $attendee->toArray(),
-            $allAttendees
-        );
+        $allAttendeesAsArray = $this->normalizer->normalize($allAttendees);
 
         return new Response(json_encode($allAttendeesAsArray), Response::HTTP_OK, [
             'Content-Type' => 'application/json',

@@ -120,15 +120,4 @@ class Attendee
 
         return $this;
     }
-
-    #[ArrayShape(['identifier' => "\Ramsey\Uuid\UuidInterface", 'firstname' => 'string', 'lastname' => 'string', 'email' => 'string'])]
-    public function toArray(): array
-    {
-        return [
-            'identifier' => $this->identifier,
-            'firstname' => $this->firstname,
-            'lastname' => $this->lastname,
-            'email' => $this->email,
-        ];
-    }
 }
